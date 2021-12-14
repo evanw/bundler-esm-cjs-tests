@@ -3,17 +3,17 @@ const tests = [
   // These are inconsistent due to special-casing
 
   {
-    'entry.js': `import * as entry from './entry'\ninput.works = entry.__esModule === void 0`,
+    'entry.js': `import * as entry from './entry.js'\ninput.works = entry.__esModule === void 0`,
   }, {
-    'entry.js': `import * as entry from './entry'\ninput.works =\n  entry[Math.random() < 1 && '__esModule'] === void 0`,
+    'entry.js': `import * as entry from './entry.js'\ninput.works =\n  entry[Math.random() < 1 && '__esModule'] === void 0`,
   },
 
   {
     'entry.js': `import './foo.js'`,
-    'foo.js': `import * as foo from './foo'\ninput.works = foo.__esModule === void 0`,
+    'foo.js': `import * as foo from './foo.js'\ninput.works = foo.__esModule === void 0`,
   }, {
     'entry.js': `import './foo.js'`,
-    'foo.js': `import * as foo from './foo'\ninput.works =\n  foo[Math.random() < 1 && '__esModule'] === void 0`,
+    'foo.js': `import * as foo from './foo.js'\ninput.works =\n  foo[Math.random() < 1 && '__esModule'] === void 0`,
   },
 
   {
@@ -73,21 +73,21 @@ input.works = import('./foo.js').then(foo3 =>
   // These all pass
 
   {
-    'entry.js': `const entry = require('./entry')\ninput.works = entry.__esModule === void 0`,
+    'entry.js': `const entry = require('./entry.js')\ninput.works = entry.__esModule === void 0\nexports.foo = 123`,
   }, {
-    'entry.js': `const entry = require('./entry')\ninput.works =\n  entry[Math.random() < 1 && '__esModule'] === void 0`,
+    'entry.js': `const entry = require('./entry.js')\ninput.works =\n  entry[Math.random() < 1 && '__esModule'] === void 0\nexports.foo = 123`,
   },
 
   {
-    'entry.js': `const entry = require('./entry')\ninput.works = entry.__esModule === true\nexport {}`,
+    'entry.js': `const entry = require('./entry.js')\ninput.works = entry.__esModule === true\nexport {}`,
   }, {
-    'entry.js': `const entry = require('./entry')\ninput.works =\n  entry[Math.random() < 1 && '__esModule'] === true\nexport {}`,
+    'entry.js': `const entry = require('./entry.js')\ninput.works =\n  entry[Math.random() < 1 && '__esModule'] === true\nexport {}`,
   },
 
   {
-    'entry.js': `const entry = require('./entry')\ninput.works = entry.__esModule === true\nexport default 123`,
+    'entry.js': `const entry = require('./entry.js')\ninput.works = entry.__esModule === true\nexport default 123`,
   }, {
-    'entry.js': `const entry = require('./entry')\ninput.works =\n  entry[Math.random() < 1 && '__esModule'] === true\nexport default 123`,
+    'entry.js': `const entry = require('./entry.js')\ninput.works =\n  entry[Math.random() < 1 && '__esModule'] === true\nexport default 123`,
   },
 
   {
@@ -243,6 +243,7 @@ const webpack = require('webpack')
 const esbuild = require('esbuild')
 const parcel = require('@parcel/core')
 const rollup = require('rollup')
+const child_process = require('child_process')
 const pluginNodeResolve = require('@rollup/plugin-node-resolve')
 const pluginCommonJS = require('@rollup/plugin-commonjs')
 
@@ -347,6 +348,28 @@ const bundlers = {
     }
     return err
   },
+
+  async node({ entryFile, inDir }) {
+    const child = child_process.spawn(process.execPath, ['--no-warnings', '--loader', './node-test-loader.mjs', path.join(inDir, entryFile)]);
+
+    let stderr = '';
+    child.stderr.setEncoding('utf8');
+    child.stderr.on('data', data => stderr += data);
+
+    let stdout = '';
+    child.stdout.setEncoding('utf8');
+    child.stdout.on('data', data => stdout += data);
+
+    const code = await new Promise(resolve => child.on('close', resolve));
+
+    if (code === 0) {
+      if (stdout !== 'SUCCESS\n')
+        return stdout;
+    }
+    else {
+      return stderr;
+    }
+  },
 }
 
 function setup({ test, inDir }) {
@@ -386,7 +409,7 @@ async function run() {
       setup({ test, inDir })
 
       const err = await bundlers[bundler]({ entryFile, inDir, outDir })
-      console.log(`  ${bundler}: ${err ? `🚫 ${err && err.message || err}`.split('\n')[0] : '✅'}`)
+      console.log(`  ${bundler}: ${err ? `🚫 ${err && err.message || err}`.split('\n').join('\n    ') : '✅'}`)
       result[bundler] = !err
     }
 
