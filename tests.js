@@ -51,18 +51,21 @@ const tests = [
   {
     'entry.js': `const foo = require('./foo.js')
 import * as foo2 from './foo.js'
-input.works =
-  foo.bar === 123 && foo2.bar === 123 &&
-  foo.__esModule === true &&
-  foo2.__esModule === void 0`,
+input.works = import('./foo.js').then(foo3 =>
+  foo.bar === 123 && foo.__esModule === true &&
+  foo2.bar === 123 && foo2.__esModule === void 0 &&
+  foo3.bar === 123 && foo3.__esModule === void 0)`,
     'foo.js': `export let bar = 123`,
   }, {
     'entry.js': `const foo = require('./foo.js')
 import * as foo2 from './foo.js'
-input.works =
-  foo.bar === 123 && foo2.bar === 123 &&
+input.works = import('./foo.js').then(foo3 =>
+  foo.bar === 123 &&
+  foo2.bar === 123 &&
+  foo3.bar === 123 &&
   foo[Math.random() < 1 && '__esModule'] === true &&
-  foo2[Math.random() < 1 && '__esModule'] === void 0`,
+  foo2[Math.random() < 1 && '__esModule'] === void 0 &&
+  foo3[Math.random() < 1 && '__esModule'] === void 0)`,
     'foo.js': `export let bar = 123`,
   },
 
@@ -117,6 +120,14 @@ input.works =
   }, {
     'entry.js': `import * as foo from './foo.js'\ninput.works =\n  foo[Math.random() < 1 && 'default'].bar === 123`,
     'foo.js': `exports[Math.random() < 1 && '__esModule'] = true\nexports[Math.random() < 1 && 'default'] = { bar: 123 }`,
+  },
+
+  {
+    'entry.js': `input.works = import('./foo.js')\n  .then(foo => foo.default === 123 &&\n    foo.__esModule === void 0)`,
+    'foo.js': `export default 123`,
+  }, {
+    'entry.js': `input.works = import('./foo.js')\n  .then(foo =>\n    foo[Math.random() < 1 && 'default'] === 123 &&\n    foo[Math.random() < 1 && '__esModule'] === void 0)`,
+    'foo.js': `export default 123`,
   },
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -210,26 +221,32 @@ const pluginNodeResolve = require('@rollup/plugin-node-resolve')
 const pluginCommonJS = require('@rollup/plugin-commonjs')
 
 const bundlers = {
-  webpack({ entryFile, inDir, outDir }) {
-    return new Promise(resolve => webpack({
+  async webpack({ entryFile, inDir, outDir }) {
+    let err = await new Promise(resolve => webpack({
       entry: path.join(inDir, entryFile),
       output: {
         path: outDir,
         filename: entryFile,
       },
+      plugins: [
+        new webpack.optimize.LimitChunkCountPlugin({
+          maxChunks: 1
+        }),
+      ],
     }, (err, stats) => {
       if (!err && stats.hasErrors()) err = stats.toJson().errors[0]
-      if (!err) {
-        try {
-          const input = {}
-          new Function('input', fs.readFileSync(path.join(outDir, entryFile), 'utf8'))(input)
-          if (!input.works) throw new Error('Test did not pass')
-        } catch (e) {
-          err = e
-        }
-      }
       resolve(err)
     }))
+    if (!err) {
+      try {
+        const input = {}
+        new Function('input', fs.readFileSync(path.join(outDir, entryFile), 'utf8'))(input)
+        if (!await input.works) throw new Error('Test did not pass')
+      } catch (e) {
+        err = e
+      }
+    }
+    return err
   },
 
   async esbuild({ entryFile, inDir, outDir }) {
@@ -244,7 +261,7 @@ const bundlers = {
       })
       const input = {}
       new Function('input', fs.readFileSync(outfile, 'utf8'))(input)
-      if (!input.works) throw new Error('Test did not pass')
+      if (!await input.works) throw new Error('Test did not pass')
     } catch (e) {
       if (e && e.errors && e.errors[0]) e = new Error(e.errors[0].text)
       err = e
@@ -270,7 +287,7 @@ const bundlers = {
       new Function('input', 'globalThis', 'self', 'window', 'global',
         fs.readFileSync(path.join(outDir, entryFile), 'utf8'))(
           input, globalObj, globalObj, globalObj, globalObj)
-      if (!input.works) throw new Error('Test did not pass')
+      if (!await input.works) throw new Error('Test did not pass')
     } catch (e) {
       err = e
     }
@@ -298,7 +315,7 @@ const bundlers = {
       })
       const input = {}
       new Function('input', fs.readFileSync(file, 'utf8'))(input)
-      if (!input.works) throw new Error('Test did not pass')
+      if (!await input.works) throw new Error('Test did not pass')
     } catch (e) {
       err = e
     }
