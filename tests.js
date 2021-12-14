@@ -9,6 +9,14 @@ const tests = [
   },
 
   {
+    'entry.js': `import './foo.js'`,
+    'foo.js': `import * as foo from './foo'\ninput.works = foo.__esModule === void 0`,
+  }, {
+    'entry.js': `import './foo.js'`,
+    'foo.js': `import * as foo from './foo'\ninput.works =\n  foo[Math.random() < 1 && '__esModule'] === void 0`,
+  },
+
+  {
     'entry.js': `import * as foo from './foo.js'\ninput.works = foo.default === '123'`,
     'foo.js': `module.exports = '123'`,
   }, {

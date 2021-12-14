@@ -28,6 +28,23 @@ Each test has a "direct" version and an "indirect" version. The indirect version
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
+  import './foo.js'
+foo.js:
+  import * as foo from './foo'
+  input.works = foo.__esModule === void 0
+</pre>Indirect:<pre>entry.js:
+  import './foo.js'
+foo.js:
+  import * as foo from './foo'
+  input.works =
+    foo[Math.random() < 1 && '__esModule'] === void 0
+</pre></td>
+<td>webpack<br>🚫<br><br>webpack<br>🚫</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
+<td>esbuild<br>✅<br><br>esbuild<br>🚫</td>
+<td>parcel<br>✅<br><br>parcel<br>✅</td>
+</tr>
+<tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
   input.works = foo.default === '123'
 foo.js:
@@ -412,9 +429,9 @@ foo.js:
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Percent handled:</td>
-<td>66.7%</td>
-<td>66.7%</td>
-<td>54.8%</td>
-<td>38.1%</td>
+<td>63.6%</td>
+<td>63.6%</td>
+<td>54.5%</td>
+<td>40.9%</td>
 </tr>
 </table>
