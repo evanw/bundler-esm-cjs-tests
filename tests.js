@@ -341,7 +341,7 @@ const bundlers = {
     const code = await new Promise(resolve => child.on('close', resolve));
 
     if (code === 0) {
-      return stdout === 'SUCCESS';
+      return stdout !== 'SUCCESS\n';
     }
     else {
       return stderr;

@@ -13,7 +13,7 @@ Each test has a "direct" version and an "indirect" version. The indirect version
 ## Results
 
 <table>
-<tr><th>Test</th><th>node</th><th>rollup</th><th>esbuild</th><th>parcel</th><th>webpack</th></tr>
+<tr><th>Test</th><th>rollup</th><th>node</th><th>esbuild</th><th>parcel</th><th>webpack</th></tr>
 <tr><td>Direct:<pre>entry.js:
   import * as entry from './entry'
   input.works = entry.__esModule === void 0
@@ -22,8 +22,8 @@ Each test has a "direct" version and an "indirect" version. The indirect version
   input.works =
     entry[Math.random() < 1 && '__esModule'] === void 0
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -40,8 +40,8 @@ foo.js:
   input.works =
     foo[Math.random() < 1 && '__esModule'] === void 0
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -58,8 +58,8 @@ foo.js:
 foo.js:
   module[Math.random() < 1 && 'exports'] = '123'
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -78,8 +78,8 @@ foo.js:
 foo.js:
   export let bar = 123
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>🚫<br><br>rollup<br>✅</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -100,8 +100,8 @@ foo.js:
   export let __esModule = false
   export default { bar: 123 }
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -121,8 +121,8 @@ foo.js:
   exports[Math.random() < 1 && '__esModule'] = false
   exports[Math.random() < 1 && 'default'] = { bar: 123 }
 </pre></td>
-<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>✅</td>
+<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -146,8 +146,8 @@ foo.js:
 foo.js:
   export let bar = 123
 </pre></td>
-<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
+<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>esbuild<br>✅<br><br>esbuild<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -165,8 +165,8 @@ foo.js:
 foo.js:
   export let bar = 123
 </pre></td>
-<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -185,8 +185,8 @@ foo.js:
 foo.js:
   export default 123
 </pre></td>
-<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -208,8 +208,8 @@ foo.js:
 bar.js:
   export let baz = 123
 </pre></td>
-<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -229,8 +229,8 @@ foo.js:
   module[Math.random() < 1 && 'exports'] =
     { default: { bar: 123 } }
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -246,8 +246,8 @@ foo.js:
 foo.js:
   module[Math.random() < 1 && 'exports'] = 123
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -266,8 +266,8 @@ foo.js:
   exports[Math.random() < 1 && '__esModule'] = true
   exports[Math.random() < 1 && 'default'] = { bar: 123 }
 </pre></td>
-<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -283,8 +283,8 @@ foo.js:
 foo.js:
   module[Math.random() < 1 && 'exports'] = '123'
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -300,8 +300,8 @@ foo.js:
 foo.js:
   module[Math.random() < 1 && 'exports'] = '123'
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -322,8 +322,8 @@ foo.js:
   export let __esModule = true
   export default { bar: 123 }
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -342,8 +342,8 @@ foo.js:
   export let __esModule = true
   export default { bar: 123 }
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -362,8 +362,8 @@ foo.js:
   export let __esModule = false
   export default { bar: 123 }
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -380,8 +380,8 @@ foo.js:
   module[Math.random() < 1 && 'exports'] =
     { bar: 123, __esModule: true }
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
+<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
@@ -404,8 +404,8 @@ foo.cjs:
 package.json:
   { "type": "module" }
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
@@ -424,8 +424,8 @@ foo.js:
   module[Math.random() < 1 && 'exports'] =
     { default: { bar: 123 }, __esModule: true }
 </pre></td>
-<td>node<br>✅<br><br>node<br>✅</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
+<td>node<br>✅<br><br>node<br>✅</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
@@ -444,14 +444,14 @@ foo.js:
   module[Math.random() < 1 && 'exports'] =
     { default: { bar: 123 }, __esModule: true }
 </pre></td>
-<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
+<td>node<br>🚫<br><br>node<br>🚫</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
 </tr>
 <tr><td>Percent handled:</td>
-<td>68.2%</td>
+<td>63.6%</td>
 <td>63.6%</td>
 <td>54.5%</td>
 <td>40.9%</td>
