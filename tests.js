@@ -1,4 +1,4 @@
-const tests = [
+export const tests = [
   ////////////////////////////////////////////////////////////////////////////////
   // These are inconsistent due to special-casing
 
@@ -211,14 +211,19 @@ input.works = import('./foo.js').then(foo3 =>
   },
 ]
 
-const fs = require('fs')
-const path = require('path')
-const webpack = require('webpack')
-const esbuild = require('esbuild')
-const parcel = require('@parcel/core')
-const rollup = require('rollup')
-const pluginNodeResolve = require('@rollup/plugin-node-resolve')
-const pluginCommonJS = require('@rollup/plugin-commonjs')
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import webpack from 'webpack';
+import esbuild from 'esbuild';
+// Parcel doesn't like being imported
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const parcel = require('@parcel/core');
+import * as rollup from 'rollup';
+import pluginNodeResolve from '@rollup/plugin-node-resolve';
+import pluginCommonJS from '@rollup/plugin-commonjs';
+import { spawn } from 'child_process';
 
 const bundlers = {
   async webpack({ entryFile, inDir, outDir }) {
@@ -301,7 +306,7 @@ const bundlers = {
         input: path.join(inDir, entryFile),
         onwarn: x => { throw new Error(x) },
         plugins: [
-          pluginNodeResolve.default({
+          pluginNodeResolve({
             browser: true,
           }),
           pluginCommonJS(),
@@ -321,10 +326,33 @@ const bundlers = {
     }
     return err
   },
+
+  async node({ entryFile, inDir }) {
+    const child = spawn(process.execPath, ['--no-warnings', '--loader', './node-test-loader.js', path.join(inDir, entryFile)]);
+
+    let stderr = '';
+    child.stderr.setEncoding('utf8');
+    child.stderr.on('data', data => stderr += data);
+
+    let stdout = '';
+    child.stdout.setEncoding('utf8');
+    child.stdout.on('data', data => stdout += data);
+
+    const code = await new Promise(resolve => child.on('close', resolve));
+
+    if (code === 0) {
+      return 
+    }
+    else {
+      return stderr;
+    }
+  }
 }
 
 function setup({ test, inDir }) {
   fs.mkdirSync(inDir, { recursive: true })
+  // package.json of this package can change interpretation - change it back
+  fs.writeFileSync(path.join(inDir, 'package.json'), JSON.stringify({ type: 'commonjs' }));
 
   for (const file in test) {
     const absFile = path.join(inDir, file)
@@ -334,8 +362,8 @@ function setup({ test, inDir }) {
 }
 
 async function run() {
-  const testCasesDir = path.join(__dirname, 'cases')
-  const parcelCacheDir = path.join(__dirname, '.parcel-cache')
+  const testCasesDir = fileURLToPath(new URL('cases', import.meta.url));
+  const parcelCacheDir = fileURLToPath(new URL('.parce-cache', import.meta.url));
   const results = []
   let counter = 0
 
@@ -426,7 +454,7 @@ async function run() {
     text += `</table>\n`
   }
 
-  const readmePath = path.join(__dirname, 'README.md')
+  const readmePath = fileURLToPath(new URL('README.md', import.meta.url));
   const readmeText = fs.readFileSync(readmePath, 'utf8')
   const index = readmeText.indexOf('## Results')
   let text = readmeText.slice(0, index)
@@ -437,4 +465,4 @@ async function run() {
   fs.writeFileSync(readmePath, text)
 }
 
-run()
+await run();

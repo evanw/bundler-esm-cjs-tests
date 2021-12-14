@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "@parcel/config-default": "2.0.1",
     "@parcel/core": "2.0.1",
