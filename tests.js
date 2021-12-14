@@ -73,6 +73,24 @@ input.works = import('./foo.js').then(foo3 =>
   // These all pass
 
   {
+    'entry.js': `const entry = require('./entry')\ninput.works = entry.__esModule === void 0`,
+  }, {
+    'entry.js': `const entry = require('./entry')\ninput.works =\n  entry[Math.random() < 1 && '__esModule'] === void 0`,
+  },
+
+  {
+    'entry.js': `const entry = require('./entry')\ninput.works = entry.__esModule === true\nexport {}`,
+  }, {
+    'entry.js': `const entry = require('./entry')\ninput.works =\n  entry[Math.random() < 1 && '__esModule'] === true\nexport {}`,
+  },
+
+  {
+    'entry.js': `const entry = require('./entry')\ninput.works = entry.__esModule === true\nexport default 123`,
+  }, {
+    'entry.js': `const entry = require('./entry')\ninput.works =\n  entry[Math.random() < 1 && '__esModule'] === true\nexport default 123`,
+  },
+
+  {
     'entry.js': `const foo = require('./foo.js')\ninput.works = foo.bar === 123 &&\n  foo.__esModule === true`,
     'foo.js': `export let bar = 123`,
   }, {
@@ -377,18 +395,6 @@ async function run() {
     return { bundler, count }
   }).sort((a, b) => b.count - a.count).map(({ bundler }) => bundler)
 
-  const maxWidth = Math.max(...sortedBundlers.map(x => x.length))
-  console.log(`Summary:`)
-  for (const bundler of sortedBundlers) {
-    let text = `  ${bundler}: `.padEnd(maxWidth + 4, ' ')
-    for (let i = 0; i < results.length; i += 2) {
-      text += results[i + 0][bundler] ? '✅' : '🚫'
-      text += results[i + 1][bundler] ? '✅' : '🚫'
-      text += ' '
-    }
-    console.log(text)
-  }
-
   const printTable = results => {
     text += `<table>\n`
     text += `<tr><th>Test</th>`
@@ -423,7 +429,7 @@ async function run() {
       text += `<td>${(counts[bundler] / results.length * 100).toFixed(1)}%</td>\n`
     }
     text += `</tr>\n`
-    text += `</table>\n`
+    text += `</table>\n\n`
   }
 
   const readmePath = path.join(__dirname, 'README.md')
@@ -433,6 +439,21 @@ async function run() {
 
   text += `## Results\n\n`
   printTable(results)
+
+  const maxWidth = Math.max(...sortedBundlers.map(x => x.length))
+  text += `## Visual summary\n\n<pre>\n`
+  console.log(`Visual summary:`)
+  for (const bundler of sortedBundlers) {
+    let summary = `${bundler}: `.padEnd(maxWidth + 2, ' ')
+    for (let i = 0; i < results.length; i += 2) {
+      summary += results[i + 0][bundler] ? '✅' : '🚫'
+      summary += results[i + 1][bundler] ? '✅' : '🚫'
+      summary += ' '
+    }
+    console.log(`  ${summary}`)
+    text += `${summary}\n`
+  }
+  text += `</pre>\n`
 
   fs.writeFileSync(readmePath, text)
 }
