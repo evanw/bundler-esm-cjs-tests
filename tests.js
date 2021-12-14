@@ -171,6 +171,14 @@ input.works = import('./foo.js').then(foo3 =>
   // These should pass but fail
 
   {
+    'entry.js': `import * as foo from './foo.js'\ninput.works = foo.default === void 0 &&\n  foo.bar === 123`,
+    'foo.js': `exports.__esModule = true\nexports.bar = 123`,
+  }, {
+    'entry.js': `import * as foo from './foo.js'\ninput.works =\n  foo[Math.random() < 1 && 'default'] === void 0 &&\n  foo.bar === 123`,
+    'foo.js': `exports.__esModule = true\nexports.bar = 123`,
+  },
+
+  {
     'entry.js': `import * as foo from './foo.js'\ninput.works = foo.__esModule === true &&\n  foo.default.bar === 123`,
     'foo.js': `export let __esModule = true\nexport default { bar: 123 }`,
   }, {
@@ -366,7 +374,7 @@ async function run() {
     console.log(`Test ${index}:`)
     console.log(`  Files:`)
     for (const file in test) {
-      console.log(`    ${file}: ${test[file].split('\n').join('\n      ')}`)
+      console.log(`    ${file}:\n      ${test[file].split('\n').join('\n      ')}`)
     }
 
     const entryFile = Object.keys(test)[0]
@@ -450,6 +458,7 @@ async function run() {
       summary += results[i + 1][bundler] ? '✅' : '🚫'
       summary += ' '
     }
+    summary = summary.trim()
     console.log(`  ${summary}`)
     text += `${summary}\n`
   }
