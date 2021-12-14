@@ -15,7 +15,7 @@ All tests have been run through the JS bundlers Webpack, Rollup, Parcel, and esb
 ## Results
 
 <table>
-<tr><th>Test</th><th>node</th><th>webpack</th><th>esbuild</th><th>rollup</th><th>parcel</th></tr>
+<tr><th>Test</th><th>esbuild</th><th>node</th><th>webpack</th><th>rollup</th><th>parcel</th></tr>
 <tr><td>Direct:<pre>entry.js:
   import * as entry from './entry.js'
   input.works = entry.__esModule === void 0
@@ -24,9 +24,9 @@ All tests have been run through the JS bundlers Webpack, Rollup, Parcel, and esb
   input.works =
     entry[Math.random() < 1 && '__esModule'] === void 0
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>🚫</td>
-<td>esbuild<br>✅<br><br>esbuild<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
@@ -42,9 +42,9 @@ foo.js:
   input.works =
     foo[Math.random() < 1 && '__esModule'] === void 0
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>esbuild<br>✅<br><br>esbuild<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
@@ -60,9 +60,9 @@ foo.js:
 foo.js:
   module[Math.random() < 1 && 'exports'] = '123'
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>🚫</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -80,9 +80,9 @@ foo.js:
 foo.js:
   export let bar = 123
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>esbuild<br>✅<br><br>esbuild<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -102,9 +102,9 @@ foo.js:
   export let __esModule = false
   export default { bar: 123 }
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>🚫</td>
-<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -123,9 +123,9 @@ foo.js:
   exports[Math.random() < 1 && '__esModule'] = false
   exports[Math.random() < 1 && 'default'] = { bar: 123 }
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>🚫</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>rollup<br>🚫<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -151,9 +151,9 @@ foo.js:
 foo.js:
   export let bar = 123
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -167,9 +167,9 @@ foo.js:
     entry[Math.random() < 1 && '__esModule'] === void 0
   exports.foo = 123
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
@@ -183,9 +183,9 @@ foo.js:
     entry[Math.random() < 1 && '__esModule'] === true
   export {}
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
@@ -199,9 +199,9 @@ foo.js:
     entry[Math.random() < 1 && '__esModule'] === true
   export default 123
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
@@ -218,9 +218,9 @@ foo.js:
 foo.js:
   export let bar = 123
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
@@ -238,9 +238,9 @@ foo.js:
 foo.js:
   export default 123
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
@@ -261,9 +261,9 @@ foo.js:
 bar.js:
   export let baz = 123
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
@@ -282,9 +282,9 @@ foo.js:
   module[Math.random() < 1 && 'exports'] =
     { default: { bar: 123 } }
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
@@ -299,9 +299,9 @@ foo.js:
 foo.js:
   module[Math.random() < 1 && 'exports'] = 123
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
@@ -319,9 +319,9 @@ foo.js:
   exports[Math.random() < 1 && '__esModule'] = true
   exports[Math.random() < 1 && 'default'] = { bar: 123 }
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
@@ -339,9 +339,9 @@ foo.js:
 foo.js:
   export default 123
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -356,9 +356,9 @@ foo.js:
 foo.js:
   module[Math.random() < 1 && 'exports'] = '123'
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -373,9 +373,9 @@ foo.js:
 foo.js:
   module[Math.random() < 1 && 'exports'] = '123'
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -395,9 +395,9 @@ foo.js:
   exports.__esModule = true
   exports.bar = 123
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
@@ -417,9 +417,9 @@ foo.js:
   export let __esModule = true
   export default { bar: 123 }
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -437,9 +437,9 @@ foo.js:
   export let __esModule = true
   export default { bar: 123 }
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -457,9 +457,9 @@ foo.js:
   export let __esModule = false
   export default { bar: 123 }
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -475,9 +475,9 @@ foo.js:
 foo.js:
   export let __esModule = 0
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -493,9 +493,9 @@ foo.js:
   module[Math.random() < 1 && 'exports'] =
     { bar: 123, __esModule: true }
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
@@ -517,9 +517,9 @@ foo.cjs:
 package.json:
   { "type": "module" }
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -537,9 +537,9 @@ foo.js:
   module[Math.random() < 1 && 'exports'] =
     { default: { bar: 123 }, __esModule: true }
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
@@ -557,16 +557,16 @@ foo.js:
   module[Math.random() < 1 && 'exports'] =
     { default: { bar: 123 }, __esModule: true }
 </pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Percent handled:</td>
+<td>100.0%</td>
 <td>75.0%</td>
 <td>67.9%</td>
-<td>51.8%</td>
 <td>50.0%</td>
 <td>46.4%</td>
 </tr>
@@ -575,9 +575,9 @@ foo.js:
 ## Visual summary
 
 <pre>
+esbuild: ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅
 node:    ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 ✅✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅
 webpack: ✅🚫 🚫🚫 ✅🚫 🚫🚫 ✅🚫 ✅🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫
-esbuild: ✅🚫 ✅🚫 ✅✅ ✅🚫 🚫🚫 ✅✅ 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫
 rollup:  🚫🚫 🚫🚫 ✅✅ 🚫✅ ✅✅ 🚫✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 ✅✅ ✅✅ 🚫🚫 ✅✅ ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫
 parcel:  ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 ✅✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 ✅✅ 🚫🚫 🚫🚫 🚫🚫
 </pre>
