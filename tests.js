@@ -203,6 +203,14 @@ input.works = import('./foo.js').then(foo3 =>
   },
 
   {
+    'entry.js': `const foo = require('./foo.js')\ninput.works = foo.__esModule === true`,
+    'foo.js': `export let __esModule = 0`,
+  }, {
+    'entry.js': `const foo = require('./foo.js')\ninput.works =\n  foo[Math.random() < 1 && '__esModule'] === true`,
+    'foo.js': `export let __esModule = 0`,
+  },
+
+  {
     'entry.js': `import foo from './foo.js'\ninput.works = foo === void 0`,
     'foo.js': `module.exports = { bar: 123, __esModule: true }`,
   }, {
