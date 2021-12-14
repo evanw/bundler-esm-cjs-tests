@@ -13,7 +13,7 @@ Each test has a "direct" version and an "indirect" version. The indirect version
 ## Results
 
 <table>
-<tr><th>Test</th><th>webpack</th><th>parcel</th><th>rollup</th><th>esbuild</th></tr>
+<tr><th>Test</th><th>webpack</th><th>rollup</th><th>esbuild</th><th>parcel</th></tr>
 <tr><td>Direct:<pre>entry.js:
   import * as entry from './entry'
   input.works = entry.__esModule === void 0
@@ -23,9 +23,9 @@ Each test has a "direct" version and an "indirect" version. The indirect version
     entry[Math.random() < 1 && '__esModule'] === void 0
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>🚫</td>
-<td>parcel<br>✅<br><br>parcel<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>esbuild<br>✅<br><br>esbuild<br>🚫</td>
+<td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -40,9 +40,9 @@ foo.js:
   module[Math.random() < 1 && 'exports'] = '123'
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>🚫</td>
-<td>parcel<br>✅<br><br>parcel<br>🚫</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -59,9 +59,9 @@ foo.js:
   export let bar = 123
 </pre></td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>🚫</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -80,9 +80,9 @@ foo.js:
   export default { bar: 123 }
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>🚫</td>
-<td>parcel<br>✅<br><br>parcel<br>🚫</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -100,9 +100,9 @@ foo.js:
   exports[Math.random() < 1 && 'default'] = { bar: 123 }
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>🚫</td>
-<td>parcel<br>✅<br><br>parcel<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   const foo = require('./foo.js')
@@ -124,9 +124,9 @@ foo.js:
   export let bar = 123
 </pre></td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>esbuild<br>✅<br><br>esbuild<br>🚫</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   const foo = require('./foo.js')
@@ -142,9 +142,9 @@ foo.js:
   export let bar = 123
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
+<td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   const foo = require('./foo.js')
@@ -161,9 +161,9 @@ foo.js:
   export default 123
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
+<td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   const foo = require('./foo.js')
@@ -183,9 +183,9 @@ bar.js:
   export let baz = 123
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
+<td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import foo from './foo.js'
@@ -203,9 +203,9 @@ foo.js:
     { default: { bar: 123 } }
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
+<td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import foo from './foo.js'
@@ -219,9 +219,9 @@ foo.js:
   module[Math.random() < 1 && 'exports'] = 123
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
+<td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -238,9 +238,9 @@ foo.js:
   exports[Math.random() < 1 && 'default'] = { bar: 123 }
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
-<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -254,9 +254,9 @@ foo.js:
   module[Math.random() < 1 && 'exports'] = '123'
 </pre></td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -270,9 +270,9 @@ foo.js:
   module[Math.random() < 1 && 'exports'] = '123'
 </pre></td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -291,9 +291,9 @@ foo.js:
   export default { bar: 123 }
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -310,9 +310,9 @@ foo.js:
   export default { bar: 123 }
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -329,9 +329,9 @@ foo.js:
   export default { bar: 123 }
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import foo from './foo.js'
@@ -346,9 +346,9 @@ foo.js:
     { bar: 123, __esModule: true }
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
+<td>parcel<br>✅<br><br>parcel<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import foo from './foo.cjs'
@@ -369,9 +369,9 @@ package.json:
   { "type": "module" }
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.mjs:
   import foo from './foo.js'
@@ -388,9 +388,9 @@ foo.js:
     { default: { bar: 123 }, __esModule: true }
 </pre></td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>parcel<br>✅<br><br>parcel<br>✅</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.mts:
   import foo from './foo.js'
@@ -407,14 +407,14 @@ foo.js:
     { default: { bar: 123 }, __esModule: true }
 </pre></td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Percent handled:</td>
 <td>66.7%</td>
 <td>66.7%</td>
-<td>66.7%</td>
 <td>54.8%</td>
+<td>38.1%</td>
 </tr>
 </table>

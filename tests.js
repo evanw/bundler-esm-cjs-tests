@@ -200,24 +200,21 @@ const parcel = require('@parcel/core')
 const rollup = require('rollup')
 const pluginNodeResolve = require('@rollup/plugin-node-resolve')
 const pluginCommonJS = require('@rollup/plugin-commonjs')
-const inDir = path.join(__dirname, 'in')
-const outDir = path.join(__dirname, 'out')
-const parcelCacheDir = path.join(__dirname, '.parcel-cache')
 
 const bundlers = {
-  webpack({ entryFile }) {
+  webpack({ entryFile, inDir, outDir }) {
     return new Promise(resolve => webpack({
       entry: path.join(inDir, entryFile),
       output: {
         path: outDir,
-        filename: 'result.js',
+        filename: entryFile,
       },
     }, (err, stats) => {
       if (!err && stats.hasErrors()) err = stats.toJson().errors[0]
       if (!err) {
         try {
           const input = {}
-          new Function('input', fs.readFileSync(path.join(outDir, 'result.js')))(input)
+          new Function('input', fs.readFileSync(path.join(outDir, entryFile), 'utf8'))(input)
           if (!input.works) throw new Error('Test did not pass')
         } catch (e) {
           err = e
@@ -227,17 +224,18 @@ const bundlers = {
     }))
   },
 
-  async esbuild({ entryFile }) {
+  async esbuild({ entryFile, inDir, outDir }) {
     let err
     try {
-      const result = await esbuild.build({
+      const outfile = path.join(outDir, entryFile)
+      await esbuild.build({
         entryPoints: [path.join(inDir, entryFile)],
         bundle: true,
-        write: false,
+        outfile,
         logLevel: 'silent',
       })
       const input = {}
-      new Function('input', result.outputFiles[0].text)(input)
+      new Function('input', fs.readFileSync(outfile, 'utf8'))(input)
       if (!input.works) throw new Error('Test did not pass')
     } catch (e) {
       if (e && e.errors && e.errors[0]) e = new Error(e.errors[0].text)
@@ -246,7 +244,7 @@ const bundlers = {
     return err
   },
 
-  async parcel({ entryFile }) {
+  async parcel({ entryFile, inDir, outDir }) {
     let err
     try {
       // Prevent parcel from messing with the console
@@ -262,7 +260,7 @@ const bundlers = {
       const input = {}
       const globalObj = {} // Prevent parcel from messing with the global object
       new Function('input', 'globalThis', 'self', 'window', 'global',
-        fs.readFileSync(path.join(outDir, 'result.js'), 'utf8'))(
+        fs.readFileSync(path.join(outDir, entryFile), 'utf8'))(
           input, globalObj, globalObj, globalObj, globalObj)
       if (!input.works) throw new Error('Test did not pass')
     } catch (e) {
@@ -271,7 +269,7 @@ const bundlers = {
     return err
   },
 
-  async rollup({ entryFile }) {
+  async rollup({ entryFile, inDir, outDir }) {
     let err
     try {
       const bundle = await rollup.rollup({
@@ -284,12 +282,14 @@ const bundlers = {
           pluginCommonJS(),
         ],
       })
-      const { output } = await bundle.generate({
+      const file = path.join(outDir, entryFile)
+      await bundle.write({
         format: 'iife',
         name: 'name',
+        file,
       })
       const input = {}
-      new Function('input', output[0].code)(input)
+      new Function('input', fs.readFileSync(file, 'utf8'))(input)
       if (!input.works) throw new Error('Test did not pass')
     } catch (e) {
       err = e
@@ -298,13 +298,7 @@ const bundlers = {
   },
 }
 
-function reset() {
-  fs.rmSync(inDir, { recursive: true, force: true })
-  fs.rmSync(outDir, { recursive: true, force: true })
-  fs.rmSync(parcelCacheDir, { recursive: true, force: true })
-}
-
-function setup(test) {
+function setup({ test, inDir }) {
   fs.mkdirSync(inDir, { recursive: true })
 
   for (const file in test) {
@@ -315,23 +309,32 @@ function setup(test) {
 }
 
 async function run() {
-  let counter = 0
+  const testCasesDir = path.join(__dirname, 'cases')
+  const parcelCacheDir = path.join(__dirname, '.parcel-cache')
   const results = []
+  let counter = 0
+
+  fs.rmSync(testCasesDir, { recursive: true, force: true })
 
   for (const test of tests) {
-    console.log(`Test ${counter++}:`)
+    const index = counter++
+    const inDir = path.join(testCasesDir, `${index}`, 'in')
+
+    console.log(`Test ${index}:`)
     console.log(`  Files:`)
     for (const file in test) {
       console.log(`    ${file}: ${test[file].split('\n').join('\n      ')}`)
     }
 
-    reset()
-    setup(test)
     const entryFile = Object.keys(test)[0]
     const result = { test }
 
     for (const bundler in bundlers) {
-      const err = await bundlers[bundler]({ entryFile })
+      const outDir = path.join(testCasesDir, `${index}`, `out-${bundler}`)
+      fs.rmSync(parcelCacheDir, { recursive: true, force: true })
+      setup({ test, inDir })
+
+      const err = await bundlers[bundler]({ entryFile, inDir, outDir })
       console.log(`  ${bundler}: ${err ? `🚫 ${err && err.message || err}`.split('\n')[0] : '✅'}`)
       result[bundler] = !err
     }
@@ -339,7 +342,7 @@ async function run() {
     results.push(result)
   }
 
-  reset()
+  fs.rmSync(parcelCacheDir, { recursive: true, force: true })
 
   const sortedBundlers = Object.keys(bundlers).map(bundler => {
     let count = 0
