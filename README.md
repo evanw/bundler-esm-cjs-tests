@@ -15,7 +15,7 @@ All tests have been run through the JS bundlers Webpack, Rollup, Parcel, and esb
 ## Results
 
 <table>
-<tr><th>Test</th><th>esbuild</th><th>node</th><th>webpack</th><th>rollup</th><th>parcel</th></tr>
+<tr><th>Test</th><th>esbuild</th><th>node</th><th>webpack</th><th>parcel</th><th>rollup</th></tr>
 <tr><td>Direct:<pre>entry.js:
   import * as entry from './entry.js'
   input.works = entry.__esModule === void 0
@@ -27,8 +27,8 @@ All tests have been run through the JS bundlers Webpack, Rollup, Parcel, and esb
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>🚫</td>
-<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import './foo.js'
@@ -45,8 +45,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -63,8 +63,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>🚫</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -83,8 +83,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>rollup<br>🚫<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>🚫<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -105,8 +105,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>🚫</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -126,8 +126,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>🚫</td>
-<td>rollup<br>🚫<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>🚫<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   const foo = require('./foo.js')
@@ -154,8 +154,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   const entry = require('./entry.js')
@@ -170,8 +170,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   const entry = require('./entry.js')
@@ -186,8 +186,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   const entry = require('./entry.js')
@@ -202,8 +202,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   const foo = require('./foo.js')
@@ -221,8 +221,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   const foo = require('./foo.js')
@@ -241,8 +241,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   const foo = require('./foo.js')
@@ -264,8 +264,8 @@ bar.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import foo from './foo.js'
@@ -285,8 +285,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import foo from './foo.js'
@@ -302,8 +302,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -322,8 +322,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   input.works = import('./foo.js')
@@ -342,8 +342,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
+<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 <td>rollup<br>🚫<br><br>rollup<br>🚫</td>
-<td>parcel<br>🚫<br><br>parcel<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -359,8 +359,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -376,8 +376,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -398,8 +398,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -420,8 +420,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -440,8 +440,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import * as foo from './foo.js'
@@ -460,8 +460,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>✅<br><br>rollup<br>✅</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   const foo = require('./foo.js')
@@ -478,8 +478,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>🚫<br><br>node<br>🚫</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import foo from './foo.js'
@@ -496,8 +496,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.js:
   import foo from './foo.cjs'
@@ -520,8 +520,8 @@ package.json:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.mjs:
   import foo from './foo.js'
@@ -540,8 +540,8 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>✅<br><br>webpack<br>✅</td>
-<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 </tr>
 <tr><td>Direct:<pre>entry.mts:
   import foo from './foo.js'
@@ -560,24 +560,120 @@ foo.js:
 <td>esbuild<br>✅<br><br>esbuild<br>✅</td>
 <td>node<br>✅<br><br>node<br>✅</td>
 <td>webpack<br>🚫<br><br>webpack<br>🚫</td>
-<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
 <td>parcel<br>🚫<br><br>parcel<br>🚫</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
+</tr>
+<tr><td>Direct:<pre>entry.js:
+  import * as ns from './foo.js'
+  let keys = Object.keys(ns)
+  input.works = ns.foo === 123 &&
+    keys.includes('foo') && !keys.includes('default')
+foo.js:
+  exports.__esModule = true
+  exports.foo = 123
+</pre>Indirect:<pre>entry.js:
+  import * as ns from './foo.js'
+  let keys = Object.keys(ns)
+  input.works = ns.foo === 123 &&
+    keys.includes('foo') && !keys.includes('default')
+foo.js:
+  exports[Math.random() < 1 && '__esModule'] = true
+  exports[Math.random() < 1 && 'foo'] = 123
+</pre></td>
+<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
+<td>node<br>✅<br><br>node<br>✅</td>
+<td>webpack<br>✅<br><br>webpack<br>✅</td>
+<td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
+</tr>
+<tr><td>Direct:<pre>entry.js:
+  import * as ns from './foo.js'
+  input.works = ns.foo === 123 &&
+    {}.hasOwnProperty.call(ns, 'foo') &&
+    !{}.hasOwnProperty.call(ns, 'default')
+foo.js:
+  exports.__esModule = true
+  exports.foo = 123
+</pre>Indirect:<pre>entry.js:
+  import * as ns from './foo.js'
+  input.works = ns.foo === 123 &&
+    {}.hasOwnProperty.call(ns, 'foo') &&
+    !{}.hasOwnProperty.call(ns, 'default')
+foo.js:
+  exports[Math.random() < 1 && '__esModule'] = true
+  exports[Math.random() < 1 && 'foo'] = 123
+</pre></td>
+<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
+<td>node<br>✅<br><br>node<br>✅</td>
+<td>webpack<br>✅<br><br>webpack<br>✅</td>
+<td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
+</tr>
+<tr><td>Direct:<pre>entry.js:
+  import * as ns from './foo.js'
+  let keys = Object.keys(ns)
+  input.works =
+    ns.default === 123 && !keys.includes('default')
+foo.js:
+  exports.__esModule = true
+  Object.defineProperty(exports,
+    'default', { value: 123 })
+</pre>Indirect:<pre>entry.js:
+  import * as ns from './foo.js'
+  let keys = Object.keys(ns)
+  input.works =
+    ns.default === 123 && !keys.includes('default')
+foo.js:
+  exports[Math.random() < 1 && '__esModule'] = true
+  Object.defineProperty(exports,
+    Math.random() < 1 && 'default', { value: 123 })
+</pre></td>
+<td>esbuild<br>🚫<br><br>esbuild<br>🚫</td>
+<td>node<br>✅<br><br>node<br>✅</td>
+<td>webpack<br>✅<br><br>webpack<br>✅</td>
+<td>parcel<br>✅<br><br>parcel<br>✅</td>
+<td>rollup<br>🚫<br><br>rollup<br>🚫</td>
+</tr>
+<tr><td>Direct:<pre>entry.js:
+  import * as ns from './foo.js'
+  let keys = Object.keys(ns)
+  input.works =
+    ns.default === 123 && keys.includes('default')
+foo.js:
+  exports.__esModule = true
+  Object.defineProperty(exports, 'default',
+    { value: 123, enumerable: true })
+</pre>Indirect:<pre>entry.js:
+  import * as ns from './foo.js'
+  let keys = Object.keys(ns)
+  input.works =
+    ns.default === 123 && keys.includes('default')
+foo.js:
+  exports[Math.random() < 1 && '__esModule'] = true
+  Object.defineProperty(exports, Math.random() < 1 && 'default',
+    { value: 123, enumerable: true })
+</pre></td>
+<td>esbuild<br>✅<br><br>esbuild<br>✅</td>
+<td>node<br>✅<br><br>node<br>✅</td>
+<td>webpack<br>✅<br><br>webpack<br>✅</td>
+<td>parcel<br>✅<br><br>parcel<br>🚫</td>
+<td>rollup<br>✅<br><br>rollup<br>✅</td>
 </tr>
 <tr><td>Percent handled:</td>
-<td>100.0%</td>
-<td>75.0%</td>
-<td>67.9%</td>
-<td>50.0%</td>
-<td>46.4%</td>
+<td>90.6%</td>
+<td>78.1%</td>
+<td>71.9%</td>
+<td>51.6%</td>
+<td>46.9%</td>
 </tr>
 </table>
 
 ## Visual summary
 
 <pre>
-esbuild: ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅
-node:    ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 ✅✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅
-webpack: ✅🚫 🚫🚫 ✅🚫 🚫🚫 ✅🚫 ✅🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫
-rollup:  🚫🚫 🚫🚫 ✅✅ 🚫✅ ✅✅ 🚫✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 ✅✅ ✅✅ 🚫🚫 ✅✅ ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫
-parcel:  ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 ✅✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 ✅✅ 🚫🚫 🚫🚫 🚫🚫
+esbuild: ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 ✅✅
+node:    ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 ✅✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅
+webpack: ✅🚫 🚫🚫 ✅🚫 🚫🚫 ✅🚫 ✅🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅
+parcel:  ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 ✅✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 ✅✅ 🚫🚫 🚫🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅🚫
+rollup:  🚫🚫 🚫🚫 ✅✅ 🚫✅ ✅✅ 🚫✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ ✅✅ 🚫🚫 ✅✅ ✅✅ 🚫🚫 ✅✅ ✅✅ ✅✅ 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 🚫🚫 ✅✅
 </pre>

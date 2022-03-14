@@ -243,6 +243,38 @@ input.works = import('./foo.js').then(foo3 =>
     'entry.mts': `import foo from './foo.js'\ninput.works =\n  foo[Math.random() < 1 && 'default'].bar === 123`,
     'foo.js': `module[Math.random() < 1 && 'exports'] =\n  { default: { bar: 123 }, __esModule: true }`,
   },
+
+  {
+    'entry.js': `import * as ns from './foo.js'\nlet keys = Object.keys(ns)\ninput.works = ns.foo === 123 &&\n  keys.includes('foo') && !keys.includes('default')`,
+    'foo.js': `exports.__esModule = true\nexports.foo = 123`,
+  }, {
+    'entry.js': `import * as ns from './foo.js'\nlet keys = Object.keys(ns)\ninput.works = ns.foo === 123 &&\n  keys.includes('foo') && !keys.includes('default')`,
+    'foo.js': `exports[Math.random() < 1 && '__esModule'] = true\nexports[Math.random() < 1 && 'foo'] = 123`,
+  },
+
+  {
+    'entry.js': `import * as ns from './foo.js'\ninput.works = ns.foo === 123 &&\n  {}.hasOwnProperty.call(ns, 'foo') &&\n  !{}.hasOwnProperty.call(ns, 'default')`,
+    'foo.js': `exports.__esModule = true\nexports.foo = 123`,
+  }, {
+    'entry.js': `import * as ns from './foo.js'\ninput.works = ns.foo === 123 &&\n  {}.hasOwnProperty.call(ns, 'foo') &&\n  !{}.hasOwnProperty.call(ns, 'default')`,
+    'foo.js': `exports[Math.random() < 1 && '__esModule'] = true\nexports[Math.random() < 1 && 'foo'] = 123`,
+  },
+
+  {
+    'entry.js': `import * as ns from './foo.js'\nlet keys = Object.keys(ns)\ninput.works =\n  ns.default === 123 && !keys.includes('default')`,
+    'foo.js': `exports.__esModule = true\nObject.defineProperty(exports,\n  'default', { value: 123 })`,
+  }, {
+    'entry.js': `import * as ns from './foo.js'\nlet keys = Object.keys(ns)\ninput.works =\n  ns.default === 123 && !keys.includes('default')`,
+    'foo.js': `exports[Math.random() < 1 && '__esModule'] = true\nObject.defineProperty(exports,\n  Math.random() < 1 && 'default', { value: 123 })`,
+  },
+
+  {
+    'entry.js': `import * as ns from './foo.js'\nlet keys = Object.keys(ns)\ninput.works =\n  ns.default === 123 && keys.includes('default')`,
+    'foo.js': `exports.__esModule = true\nObject.defineProperty(exports, 'default',\n  { value: 123, enumerable: true })`,
+  }, {
+    'entry.js': `import * as ns from './foo.js'\nlet keys = Object.keys(ns)\ninput.works =\n  ns.default === 123 && keys.includes('default')`,
+    'foo.js': `exports[Math.random() < 1 && '__esModule'] = true\nObject.defineProperty(exports, Math.random() < 1 && 'default',\n  { value: 123, enumerable: true })`,
+  },
 ]
 
 const fs = require('fs')
