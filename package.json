@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "@parcel/config-default": "2.0.1",
-    "@parcel/core": "2.0.1",
+    "@parcel/config-default": "2.3.2",
+    "@parcel/core": "2.3.2",
     "@rollup/plugin-commonjs": "21.0.1",
     "@rollup/plugin-node-resolve": "13.1.1",
     "esbuild": "0.14.5",
